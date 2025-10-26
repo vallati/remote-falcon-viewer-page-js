@@ -1,0 +1,83 @@
+<!-- 🎃 Fixed Halloween Countdown (Orange Themed) -->
+<div id="halloween-countdown-section" style="text-align:center;padding-bottom: 60px;padding-top:1px; background:rgba(0,0,0,0.6); border-radius:16px; box-shadow:0 0 25px rgba(255,117,24,0.3); max-width:700px;">
+  <style>
+    @font-face {
+      font-family: 'CCMonsterMash';
+      src: url('ccmonstermash.ttf') format('truetype');
+    }
+    #halloween-countdown-section h2 {
+      font-family: 'CCMonsterMash', cursive;
+      font-size: 2.8rem;
+      color: #ff7518;
+      text-shadow: 0 0 0px #ff7518, 0 0 30px #ff3b00;
+      margin-bottom: 1.5rem;
+      animation: flicker 2.5s infinite alternate;
+    }
+    #halloween-countdown-section .countdown {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-family: 'Arial', sans-serif;
+    }
+    #halloween-countdown-section .unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(255,117,24,0.1);
+      padding: 12px 6px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,117,24,0.2);
+      box-shadow: 0 0 10px rgba(255,117,24,0.2) inset;
+      min-width: 80px;
+    }
+    #halloween-countdown-section .num {
+      font-size: 2.8rem;
+      color: #fff;
+      text-shadow: 0 0 10px #ff7518;
+    }
+    #halloween-countdown-section .label {
+      color: #ffb57f;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 6px;
+    }
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {opacity: 1;}
+      20%, 24%, 55% {opacity: 0.6;}
+    }
+  </style>
+
+  <h2>Days Until Halloween</h2>
+  <div class="countdown">
+    <div class="unit"><div class="num" id="days">00</div><div class="label">Days</div></div>
+    <div class="unit"><div class="num" id="hours">00</div><div class="label">Hours</div></div>
+    <div class="unit"><div class="num" id="minutes">00</div><div class="label">Minutes</div></div>
+    <div class="unit"><div class="num" id="seconds">00</div><div class="label">Seconds</div></div>
+  </div>
+
+  <script>
+    (function() {
+      function updateCountdown() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const halloween = new Date(year, 9, 31, 0, 0, 0);
+        if (now > halloween) halloween.setFullYear(year + 1);
+        const diff = halloween - now;
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+        document.getElementById("days").textContent = d;
+        document.getElementById("hours").textContent = String(h).padStart(2,"0");
+        document.getElementById("minutes").textContent = String(m).padStart(2,"0");
+        document.getElementById("seconds").textContent = String(s).padStart(2,"0");
+      }
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    })();
+  </script>
+</div>
+<br>
+<!-- End Fixed Halloween Countdown -->
